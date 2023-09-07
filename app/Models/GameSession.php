@@ -15,6 +15,12 @@ class GameSession extends Model {
         'retries', 'number_of_pairs', 'state'
     ];
 
+    protected $attributes = [
+        'retries' => 0,
+        'number_of_pairs' => 0,
+        'state' => "STARTED",
+    ];
+
     public function memotest(): BelongsTo{
         return $this->belongsTo(Memotest::class, 'memotest_id');
     }

@@ -29,29 +29,24 @@ type Image {
 
 # Queries
 type Query {
-    memotest(id: ID @eq): Memotest @find
-    game_session(id: ID @eq): GameSession @find
+    memotest(id: ID! @eq): Memotest @find
+    gameSession(id: ID! @eq): GameSession @find
     memotests: [Memotest!]!
+    gameSessions: [GameSession!]! @all
 }
 
 # Mutations
 type Mutation {
     createMemotest(input: CreateMemotestInput! @spread): Memotest!
     addImages(input: AddImagesInput! @spread): [Image!]!
-    removeImage(id: ID!): Image @delete
-    deleteMemotest(id: ID!): Memotest @delete
-    createGameSession(input: CreateGameSessionInput! @spread): GameSession @create
-    endGameSession(id: ID!): GameSession!
+    removeImage(id: ID! @eq): Image @delete
+    deleteMemotest(id: ID! @eq): Memotest @delete
+    createGameSession(memotest_id: ID!): GameSession @create
+    endGameSession(id: ID! @eq): GameSession!
+    updateGameSession(id: ID! @eq, number_of_pairs: Int, retries: Int): GameSession @update
 }
 
 # Inputs
-input CreateGameSessionInput{
-    memotest_id: ID!
-    retries: Int!
-    number_of_pairs: Int!
-    state: State!
-}
-
 input CreateMemotestInput {
     name: String!
     images: [CreateImageInput]

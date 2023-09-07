@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Fruitcake\Cors\CorsService;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware([HandleCors::class])->group(function () {
+    Route::post('/graphql', 'GraphQLController@query');
 });

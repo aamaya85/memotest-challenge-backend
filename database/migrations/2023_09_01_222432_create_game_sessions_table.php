@@ -12,7 +12,7 @@ class CreateGameSessionsTable extends Migration {
             $table->unsignedInteger('memotest_id');
             $table->integer('retries');
             $table->integer('number_of_pairs');
-            $table->enum('state', ['Started', 'Completed']);
+            $table->enum('state', ['STARTED', 'COMPLETED']);
             $table->timestamps();
             $table->foreign('memotest_id')->references('id')->on('memotests')->onDelete('cascade');
         });
