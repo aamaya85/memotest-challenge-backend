@@ -1,19 +1,18 @@
 <?php
 
-namespace Database\Factories;
-
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Memotest;
 
-class ImageFactory extends Factory {
+class ImageFactory extends Factory
+{
+    protected $model = Image::class;
 
-    public function definition() {
-        
-        $memotestID = Memotest::inRandomOrder()->first()->id;
-
+    public function definition()
+    {
         return [
-            'url' => $this->faker->imageUrl(400, 300),
-            'memotest_id' => $memotestID,
+            'url' => $this->faker->imageUrl(),
+            'memotest_id' => null
         ];
     }
 }
+
